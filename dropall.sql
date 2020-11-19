@@ -1,0 +1,17 @@
+drop table tournament_result;
+drop table game_event;
+drop table game;
+drop table performance;
+drop table tournament;
+drop table character_stat;
+drop table character;
+drop table rule_in_set;
+drop table rule;
+drop table character_stat_type;
+drop table rule_set;
+drop table sponsor_contract;
+drop table artist;
+drop table player;
+drop table organizer;
+drop table sponsor;
+drop table human;
