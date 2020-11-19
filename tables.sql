@@ -2,9 +2,9 @@ CREATE TABLE human(
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     phone VARCHAR(12),
-    email TEXT NOT NULL,
-    telegram TEXT NOT NULL,
-    vk TEXT NOT NULL,
+    email TEXT,
+    telegram TEXT,
+    vk TEXT,
     info TEXT NOT NULL
 );
 

@@ -1,0 +1,17 @@
+delete from tournament_result;
+delete from game_event;
+delete from game;
+delete from performance;
+delete from tournament;
+delete from character_stat;
+delete from character;
+delete from rule_in_set;
+delete from rule;
+delete from character_stat_type;
+delete from rule_set;
+delete from sponsor_contract;
+delete from artist;
+delete from player;
+delete from organizer;
+delete from sponsor;
+delete from human;
