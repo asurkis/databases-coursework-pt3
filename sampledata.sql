@@ -51,3 +51,5 @@ insert into tournament_result (tournament, player, score, place)
 insert into tournament_result (tournament, player, score, place)
     select tournament.id, human.id, 1, 2
     from tournament cross join human where human.name ~ '^Блутарх$';
+insert into character_stat_type (rule_set, name, description)
+    select rule_set.id, 'Удача', 'Общая удача персонажа' from rule_set;

@@ -7,6 +7,16 @@ begin
 end;
 $$ language plpgsql;
 
+create or replace function add_default_stat() returns trigger as $$
+begin
+    insert into character_stat (character, type, value)
+        select character.id, NEW.id, 100
+            from character where NEW.rule_set = character.rule_set;
+    return NEW;
+end;
+$$ language plpgsql;
+
+
 create or replace function process_game_event() returns trigger as $$
 begin
     with old as
@@ -26,5 +36,7 @@ $$ language plpgsql;
 
 create trigger trigger_character_stats after insert on character
     for each row execute function setup_default_character_stats();
+create trigger trigger_new_stat after insert on character_stat_type
+    for each row execute function add_default_stat();
 create trigger trigger_game_event after insert on game_event
     for each row execute function process_game_event();
