@@ -1,42 +1,41 @@
-create or replace function setup_default_character_stats() returns trigger as $$
-begin
-    insert into character_stat (character, type, value)
-        select NEW.id, character_stat_type.id, 100
-            from character_stat_type where NEW.rule_set = character_stat_type.rule_set;
-    return NEW;
-end;
-$$ language plpgsql;
+CREATE OR REPLACE FUNCTION setup_default_character_stats() RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO character_stat (character, type, value)
+        SELECT NEW.id, character_stat_type.id, character_stat_type.default_value
+            FROM character_stat_type WHERE NEW.rule_set = character_stat_type.rule_set;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
-create or replace function add_default_stat() returns trigger as $$
-begin
-    insert into character_stat (character, type, value)
-        select character.id, NEW.id, 100
-            from character where NEW.rule_set = character.rule_set;
-    return NEW;
-end;
-$$ language plpgsql;
+CREATE OR REPLACE FUNCTION add_default_stat() RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO character_stat (character, type, value)
+        SELECT character.id, NEW.id, NEW.default_value
+            FROM character WHERE NEW.rule_set = character.rule_set;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
-
-create or replace function process_game_event() returns trigger as $$
-begin
+CREATE OR REPLACE FUNCTION process_game_event() RETURNS TRIGGER AS $$
+BEGIN
     with old as
-        (select case
+        (SELECT case
                 when action_with_stat = '+' then value + value_of_modification
                 when action_with_stat = '-' then value - value_of_modification
                 when action_with_stat = '*' then value * value_of_modification
                 when action_with_stat = '/' then value / value_of_modification
-                else NULL end as newval, type
-            from character_stat join rule on character_stat.type = rule.stat_to_modify
-            where NEW.rule_applied = rule.id and NEW.object = character)
-    update character_stat set value = (select newval from old)
-        where NEW.object = character and type = (select type from old);
-    return NEW;
-end;
-$$ language plpgsql;
+                else NULL END as newval, type
+            FROM character_stat join rule on character_stat.type = rule.stat_to_modify
+            WHERE NEW.rule_applied = rule.id and NEW.object = character)
+    update character_stat set value = (SELECT newval FROM old)
+        WHERE NEW.object = character and type = (SELECT type FROM old);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
-create trigger trigger_character_stats after insert on character
-    for each row execute function setup_default_character_stats();
-create trigger trigger_new_stat after insert on character_stat_type
-    for each row execute function add_default_stat();
-create trigger trigger_game_event after insert on game_event
-    for each row execute function process_game_event();
+CREATE TRIGGER trigger_character_stats AFTER INSERT ON character
+    FOR EACH ROW EXECUTE FUNCTION setup_default_character_stats();
+CREATE TRIGGER trigger_new_stat AFTER INSERT ON character_stat_type
+    FOR EACH ROW EXECUTE FUNCTION add_default_stat();
+CREATE TRIGGER trigger_game_event AFTER INSERT ON game_event
+    FOR EACH ROW EXECUTE FUNCTION process_game_event();

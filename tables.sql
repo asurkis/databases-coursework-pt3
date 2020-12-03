@@ -29,21 +29,17 @@ CREATE TABLE character_stat_type(
     id SERIAL PRIMARY KEY,
     rule_set INTEGER REFERENCES rule_set,
     name TEXT NOT NULL,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    default_value INTEGER
 );
 
 CREATE TABLE rule(
     id SERIAL PRIMARY KEY,
+    rule_set INTEGER REFERENCES rule_set,
     condition TEXT NOT NULL,
     stat_to_modify INTEGER REFERENCES character_stat_type,
     action_with_stat TEXT NOT NULL,
-    value_of_modification INTEGER not null
-);
-
-CREATE TABLE rule_in_set(
-    rule_set INTEGER REFERENCES rule_set,
-    rule INTEGER REFERENCES rule,
-    PRIMARY KEY (rule_set, rule)
+    value_of_modification INTEGER NOT NULL
 );
 
 CREATE TABLE character(
