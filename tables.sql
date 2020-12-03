@@ -1,7 +1,7 @@
 CREATE TABLE human(
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
-    phone VARCHAR(12),
+    phone TEXT,
     email TEXT,
     telegram TEXT,
     vk TEXT,
