@@ -206,14 +206,14 @@ AS $$
 $$ LANGUAGE sql;
 
 CREATE OR REPLACE VIEW tournament_result_joined_view AS
-    SELECT h.id AS human_id,
+    SELECT h.id AS player,
             h.name,
             h.info,
             h.phone,
             h.email,
             h.telegram,
             h.vk,
-            t.id AS tournament_id,
+            t.id AS tournament,
             t.place AS physical_place,
             t.start_date,
             t.finish_date,
