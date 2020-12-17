@@ -228,11 +228,11 @@ CREATE OR REPLACE VIEW tournament_result_joined_view AS
 CREATE OR REPLACE FUNCTION tournament_result_by_human(arg_id INT)
     RETURNS SETOF tournament_result_joined_view
 AS $$
-    SELECT * FROM tournament_result_joined_view WHERE human_id = arg_id;
+    SELECT * FROM tournament_result_joined_view WHERE player = arg_id;
 $$ LANGUAGE sql;
 
 CREATE OR REPLACE FUNCTION tournament_result_by_tournament(arg_id INT)
     RETURNS SETOF tournament_result_joined_view
 AS $$
-    SELECT * FROM tournament_result_joined_view WHERE tournament_id = arg_id;
+    SELECT * FROM tournament_result_joined_view WHERE tournament = arg_id;
 $$ LANGUAGE sql;
