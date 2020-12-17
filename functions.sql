@@ -13,11 +13,11 @@ $$ LANGUAGE sql;
 
 CREATE OR REPLACE FUNCTION add_player(
     arg_name TEXT,
-    arg_phone TEXT,
-    arg_email TEXT,
-    arg_telegram TEXT,
-    arg_vk TEXT,
-    arg_info TEXT) RETURNS INT AS $$
+    arg_info TEXT,
+    arg_phone TEXT = NULL,
+    arg_email TEXT = NULL,
+    arg_telegram TEXT = NULL,
+    arg_vk TEXT = NULL) RETURNS INT AS $$
 DECLARE inserted INT;
 BEGIN
     SELECT add_human(arg_name, arg_phone, arg_email, arg_telegram, arg_vk, arg_info) INTO inserted;
@@ -27,11 +27,11 @@ END; $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION add_artist(
     arg_name TEXT,
-    arg_phone TEXT,
-    arg_email TEXT,
-    arg_telegram TEXT,
-    arg_vk TEXT,
-    arg_info TEXT) RETURNS INT AS $$
+    arg_info TEXT,
+    arg_phone TEXT = NULL,
+    arg_email TEXT = NULL,
+    arg_telegram TEXT = NULL,
+    arg_vk TEXT = NULL) RETURNS INT AS $$
 DECLARE inserted INT;
 BEGIN
     SELECT add_human(arg_name, arg_phone, arg_email, arg_telegram, arg_vk, arg_info) INTO inserted;
@@ -41,11 +41,11 @@ END; $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION add_organizer(
     arg_name TEXT,
-    arg_phone TEXT,
-    arg_email TEXT,
-    arg_telegram TEXT,
-    arg_vk TEXT,
-    arg_info TEXT) RETURNS INT AS $$
+    arg_info TEXT,
+    arg_phone TEXT = NULL,
+    arg_email TEXT = NULL,
+    arg_telegram TEXT = NULL,
+    arg_vk TEXT = NULL) RETURNS INT AS $$
 DECLARE inserted INT;
 BEGIN
     SELECT add_human(arg_name, arg_phone, arg_email, arg_telegram, arg_vk, arg_info) INTO inserted;
@@ -55,11 +55,11 @@ END; $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION add_sponsor(
     arg_name TEXT,
-    arg_phone TEXT,
-    arg_email TEXT,
-    arg_telegram TEXT,
-    arg_vk TEXT,
-    arg_info TEXT) RETURNS INT AS $$
+    arg_info TEXT,
+    arg_phone TEXT = NULL,
+    arg_email TEXT = NULL,
+    arg_telegram TEXT = NULL,
+    arg_vk TEXT = NULL) RETURNS INT AS $$
 DECLARE inserted INT;
 BEGIN
     SELECT add_human(arg_name, arg_phone, arg_email, arg_telegram, arg_vk, arg_info) INTO inserted;
