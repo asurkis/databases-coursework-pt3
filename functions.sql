@@ -197,12 +197,12 @@ $$ LANGUAGE sql;
 
 CREATE OR REPLACE FUNCTION humans_by_name(arg_name TEXT) RETURNS SETOF human
 AS $$
-    SELECT * FROM human WHERE name = arg_name;
+    SELECT * FROM human WHERE name LIKE arg_name;
 $$ LANGUAGE sql;
 
 CREATE OR REPLACE FUNCTION tournaments_by_place(arg_place TEXT) RETURNS SETOF tournament
 AS $$
-    SELECT * FROM tournament WHERE place = arg_place;
+    SELECT * FROM tournament WHERE place LIKE arg_place;
 $$ LANGUAGE sql;
 
 CREATE OR REPLACE VIEW tournament_result_joined_view AS
