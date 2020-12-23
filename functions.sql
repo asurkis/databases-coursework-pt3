@@ -205,26 +205,6 @@ AS $$
     SELECT * FROM tournament WHERE place LIKE arg_place;
 $$ LANGUAGE sql;
 
-CREATE OR REPLACE VIEW tournament_result_joined_view AS
-    SELECT h.id AS player,
-            h.name,
-            h.info,
-            h.phone,
-            h.email,
-            h.telegram,
-            h.vk,
-            t.id AS tournament,
-            t.place AS physical_place,
-            t.start_date,
-            t.finish_date,
-            t.organizer,
-            t.rule_set,
-            tr.score,
-            tr.place AS ladder_place
-        FROM tournament_result AS tr
-            JOIN human AS h ON tr.player = h.id
-            JOIN tournament AS t ON tr.tournament = t.id;
-
 CREATE OR REPLACE FUNCTION tournament_result_by_human(arg_id INT)
     RETURNS SETOF tournament_result_joined_view
 AS $$
