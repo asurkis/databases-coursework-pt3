@@ -34,7 +34,7 @@ CREATE OR REPLACE VIEW tournament_rule_set_joined_view AS
 CREATE OR REPLACE VIEW character_rule_set_human_joined_view AS
     SELECT c.*,
         p.name AS player_name,
-        r.name AS result_set_name
+        r.name AS rule_set_name
     FROM character AS c
         JOIN rule_set AS r ON c.rule_set = r.id
         JOIN human AS p ON c.player = p.id;
