@@ -30,7 +30,7 @@ CREATE TABLE character_stat_type(
     rule_set INTEGER REFERENCES rule_set,
     name TEXT NOT NULL,
     description TEXT NOT NULL,
-    default_value INTEGER
+    default_value INTEGER NOT NULL DEFAULT 100
 );
 
 CREATE TABLE rule(
@@ -52,7 +52,7 @@ CREATE TABLE character(
 CREATE TABLE character_stat(
     character INTEGER REFERENCES character,
     type INTEGER REFERENCES character_stat_type,
-    value INTEGER
+    value INTEGER NOT NULL
 );
 
 CREATE TABLE tournament(
