@@ -70,3 +70,8 @@ CREATE OR REPLACE VIEW artist_performances_joined_view AS
     FROM performance
         JOIN human AS a ON a.id = performance.artist
         JOIN tournament AS t ON t.id = performance.tournament;
+
+CREATE OR REPLACE VIEW rule_with_link AS
+    SELECT r.*, t.name AS stat_name
+    FROM rule AS r JOIN character_stat_type AS t
+        ON r.stat_to_modify = t.id;
